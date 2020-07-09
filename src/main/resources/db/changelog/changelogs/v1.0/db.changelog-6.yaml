@@ -1,0 +1,292 @@
+databaseChangeLog:
+  - changeSet:
+      id:  1591795246684
+      author: alxandr_kudinov
+      comment: "create table reservation"
+      changes:
+        - createTable:
+            tableName: reservation
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: reservation_PK
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: date_of_arrival
+                  type: DATE
+              - column:
+                  name: date_of_departure
+                  type: DATE
+              - column:
+                  name: room_id
+                  type: BIGINT
+              - column:
+                  name: person_id
+                  type: BIGINT
+              - column:
+                  name: provide_id
+                  type: BIGINT
+        - sql:
+            comment:  date_of_departure must be later than date_of_arrival
+            splitStatements:  true
+            sql:  ALTER TABLE reservation ADD CONSTRAINT chk_dates_valid CHECK (date_of_departure>date_of_arrival);
+            stripComments:  true
+      rollback:
+        - dropTable:
+            tableName: reservation
+
+  - changeSet:
+      id: 1591795673650
+      author: alxandr_kudinov
+      comment: "add service - reservation foreign key"
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames:  provide_id
+            baseTableName:  reservation
+            constraintName:  fk_provide_reservation
+            onDelete:  SET NULL
+            onUpdate:  CASCADE
+            referencedColumnNames:  id
+            referencedTableName:  provide
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName:  room
+            constraintName:  fk_room_hotel
+
+  - changeSet:
+      id: 1591795753718
+      author: alxandr_kudinov
+      comment: "add room - reservation foreign key"
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames:  room_id
+            baseTableName:  reservation
+            constraintName:  fk_room_reservation
+            onDelete: SET NULL
+            onUpdate: CASCADE
+            referencedColumnNames:  id
+            referencedTableName:  room
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName: reservation
+            constraintName: fk_room_reservation
+
+  - changeSet:
+      id: 1591795798117
+      author: alxandr_kudinov
+      comment: "add person - reservation foreign key"
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: person_id
+            baseTableName: reservation
+            constraintName: fk_person_reservation
+            onDelete: CASCADE
+            onUpdate: CASCADE
+            referencedColumnNames: id
+            referencedTableName: person
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName: reservation
+            constraintName: fk_person_reservation
+
+  - changeSet:
+      id: 1591797004579
+      author: alxandr_kudinov
+      comment: "add data to reservation table"
+      changes:
+        - insert:
+            tableName: reservation
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: date_of_arrival
+                  value: 2020-02-22
+              - column:
+                  name: date_of_departure
+                  value: 2020-03-12
+              - column:
+                  name: room_id
+                  value: 1
+              - column:
+                  name: provide_id
+                  value: 1
+              - column:
+                  name: person_id
+                  value: 2
+        - insert:
+            tableName: reservation
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: date_of_arrival
+                  value: 2020-02-22
+              - column:
+                  name: date_of_departure
+                  value: 2020-06-12
+              - column:
+                  name: room_id
+                  value: 2
+              - column:
+                  name: provide_id
+                  value: 2
+              - column:
+                  name: person_id
+                  value: 2
+        - insert:
+            tableName: reservation
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: date_of_arrival
+                  value: 2020-03-22
+              - column:
+                  name: date_of_departure
+                  value: 2020-05-04
+              - column:
+                  name: room_id
+                  value: 3
+              - column:
+                  name: provide_id
+                  value: 3
+              - column:
+                  name: person_id
+                  value: 3
+        - insert:
+            tableName: reservation
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: date_of_arrival
+                  value: 2020-02-22
+              - column:
+                  name: date_of_departure
+                  value: 2020-06-44
+              - column:
+                  name: room_id
+                  value: 4
+              - column:
+                  name: provide_id
+                  value: 4
+              - column:
+                  name: person_id
+                  value: 4
+        - insert:
+            tableName: reservation
+            columns:
+              - column:
+                  name: id
+                  value: 5
+              - column:
+                  name: date_of_arrival
+                  value: 2020-01-22
+              - column:
+                  name: date_of_departure
+                  value: 2020-09-04
+              - column:
+                  name: room_id
+                  value: 5
+              - column:
+                  name: provide_id
+                  value: 5
+              - column:
+                  name: person_id
+                  value: 5
+        - insert:
+            tableName: reservation
+            columns:
+              - column:
+                  name: id
+                  value: 6
+              - column:
+                  name: date_of_arrival
+                  value: 2020-01-22
+              - column:
+                  name: date_of_departure
+                  value: 2020-11-04
+              - column:
+                  name: room_id
+                  value: 6
+              - column:
+                  name: provide_id
+                  value: 6
+              - column:
+                  name: person_id
+                  value: 6
+        - insert:
+            tableName: reservation
+            columns:
+              - column:
+                  name: id
+                  value: 7
+              - column:
+                  name: date_of_arrival
+                  value: 2020-02-22
+              - column:
+                  name: date_of_departure
+                  value: 2020-09-04
+              - column:
+                  name: room_id
+                  value: 7
+              - column:
+                  name: provide_id
+                  value: 7
+              - column:
+                  name: person_id
+                  value: 7
+        - insert:
+            tableName: reservation
+            columns:
+              - column:
+                  name: id
+                  value: 8
+              - column:
+                  name: date_of_arrival
+                  value: 2020-01-22
+              - column:
+                  name: date_of_departure
+                  value: 2020-09-04
+              - column:
+                  name: room_id
+                  value: 8
+              - column:
+                  name: provide_id
+                  value: 8
+              - column:
+                  name: person_id
+                  value: 8
+        - insert:
+            tableName: reservation
+            columns:
+              - column:
+                  name: id
+                  value: 9
+              - column:
+                  name: date_of_arrival
+                  value: 2020-08-22
+              - column:
+                  name: date_of_departure
+                  value: 2020-09-04
+              - column:
+                  name: room_id
+                  value: 9
+              - column:
+                  name: provide_id
+                  value: 9
+              - column:
+                  name: person_id
+                  value: 9
+      rollback:
+        - delete:
+            tableName: reservation
+            where: id<10

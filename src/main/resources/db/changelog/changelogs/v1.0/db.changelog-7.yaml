@@ -1,0 +1,66 @@
+databaseChangeLog:
+  - changeSet:
+      id:  1591807774680
+      author:  alxandr_kudinov
+      comment: "add person sequence"
+      changes:
+        - createSequence:
+            dataType:  int
+            incrementBy:  1
+            sequenceName:  person_seq
+            startValue:  10
+
+  - changeSet:
+      id:  1591808616434
+      author:  alxandr_kudinov
+      comment: "add hotel sequence"
+      changes:
+        - createSequence:
+            dataType:  int
+            incrementBy:  1
+            sequenceName:  hotel_seq
+            startValue:  10
+
+  - changeSet:
+      id:  1591808710745
+      author:  alxandr_kudinov
+      comment: "add room_type sequence"
+      changes:
+        - createSequence:
+            dataType:  int
+            incrementBy:  1
+            sequenceName:  room_type_seq
+            startValue:  6
+
+  - changeSet:
+      id:  1591808783129
+      author:  alxandr_kudinov
+      comment: "add room sequence"
+      changes:
+        - createSequence:
+            dataType:  int
+            incrementBy:  1
+            sequenceName:  room_seq
+            startValue:  46
+
+  - changeSet:
+      id:  1591808930664
+      author:  alxandr_kudinov
+      comment: "add provide sequence"
+      changes:
+        - createSequence:
+            dataType: int
+            incrementBy: 1
+            sequenceName: provide_seq
+            startValue: 11
+
+  - changeSet:
+      id:  1591809078441
+      author:  alxandr_kudinov
+      comment: "add reservation sequence"
+      changes:
+        - createSequence:
+            dataType: int
+            incrementBy: 1
+            sequenceName: reservation_seq
+            startValue: 10

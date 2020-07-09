@@ -1,0 +1,206 @@
+databaseChangeLog:
+  - changeSet:
+      id:  1591790605864
+      author: alxandr_kudinov
+      comment: "create table service"
+      changes:
+        - createTable:
+            tableName: provide
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: provide_PK
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: name
+                  type: VARCHAR(45)
+              - column:
+                  name: price
+                  type: INT
+              - column:
+                  name: hotel_id
+                  type: BIGINT
+      rollback:
+        - dropTable:
+            tableName: provide
+
+  - changeSet:
+      id: 1591790849603
+      author: alxandr_kudinov
+      comment: "add service - hotel foreign key"
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames:  hotel_id
+            baseTableName:  provide
+            constraintName:  fk_provide_hotel
+            onDelete:  CASCADE
+            onUpdate:  CASCADE
+            referencedColumnNames:  id
+            referencedTableName:  hotel
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName: provide
+            constraintName: fk_provide_hotel
+
+  - changeSet:
+      id: 1591790868201
+      author: alxandr_kudinov
+      comment: "add data to service table"
+      changes:
+        - insert:
+            tableName: provide
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: breakfast
+              - column:
+                  name: price
+                  value: 600
+              - column:
+                  name: hotel_id
+                  value: 1
+        - insert:
+            tableName: provide
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: name
+                  value: spa
+              - column:
+                  name: price
+                  value: 1000
+              - column:
+                  name: hotel_id
+                  value: 1
+        - insert:
+            tableName: provide
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: name
+                  value: spa
+              - column:
+                  name: price
+                  value: 1000
+              - column:
+                  name: hotel_id
+                  value: 2
+        - insert:
+            tableName: provide
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: name
+                  value: spa
+              - column:
+                  name: price
+                  value: 1000
+              - column:
+                  name: hotel_id
+                  value: 3
+        - insert:
+            tableName: provide
+            columns:
+              - column:
+                  name: id
+                  value: 5
+              - column:
+                  name: name
+                  value: spa
+              - column:
+                  name: price
+                  value: 1000
+              - column:
+                  name: hotel_id
+                  value: 4
+        - insert:
+            tableName: provide
+            columns:
+              - column:
+                  name: id
+                  value: 6
+              - column:
+                  name: name
+                  value: spa
+              - column:
+                  name: price
+                  value: 1000
+              - column:
+                  name: hotel_id
+                  value: 5
+        - insert:
+            tableName: provide
+            columns:
+              - column:
+                  name: id
+                  value: 7
+              - column:
+                  name: name
+                  value: spa
+              - column:
+                  name: price
+                  value: 1000
+              - column:
+                  name: hotel_id
+                  value: 6
+        - insert:
+            tableName: provide
+            columns:
+              - column:
+                  name: id
+                  value: 8
+              - column:
+                  name: name
+                  value: gym
+              - column:
+                  name: price
+                  value: 200
+              - column:
+                  name: hotel_id
+                  value: 7
+        - insert:
+            tableName: provide
+            columns:
+              - column:
+                  name: id
+                  value: 9
+              - column:
+                  name: name
+                  value: breakfast
+              - column:
+                  name: price
+                  value: 600
+              - column:
+                  name: hotel_id
+                  value: 8
+        - insert:
+            tableName: provide
+            columns:
+              - column:
+                  name: id
+                  value: 10
+              - column:
+                  name: name
+                  value: gym
+              - column:
+                  name: price
+                  value: 200
+              - column:
+                  name: hotel_id
+                  value: 9
+      rollback:
+        - delete:
+            tableName: provide
+            where: id<11

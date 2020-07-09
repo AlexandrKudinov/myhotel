@@ -1,0 +1,239 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1591720479117
+      author: alxandr_kudinov
+      comment: "create table hotel"
+      changes:
+        - createTable:
+            tableName: hotel
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: hotel_PK
+                  name: id
+                  type: BIGINT
+              - column:
+                  name: name
+                  type: VARCHAR(45)
+              - column:
+                  name: city
+                  type: VARCHAR(45)
+              - column:
+                  name: street
+                  type: VARCHAR(45)
+              - column:
+                  name: house_number
+                  type: INT
+              - column:
+                  name: stars
+                  type: TINYINT
+        - sql:
+            comment:  stars must be between 1 and 5
+            splitStatements:  true
+            sql:  ALTER TABLE hotel ADD CONSTRAINT chk_stars_valid CHECK (stars>=1 AND stars<=5);
+            stripComments:  true
+      rollback:
+        - dropTable:
+            tableName: hotel
+
+
+  - changeSet:
+      id: 1591720506904
+      author: alxandr_kudinov
+      comment: "add data to hotel table"
+      changes:
+        - insert:
+            tableName: hotel
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: Astoria
+              - column:
+                  name: city
+                  value: Saint-Petersburg
+              - column:
+                  name: street
+                  value: Nevsky avenue
+              - column:
+                  name: house_number
+                  value: 12
+              - column:
+                  name: stars
+                  value: 5
+        - insert:
+            tableName: hotel
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: name
+                  value: Radisson
+              - column:
+                  name: city
+                  value: New-York
+              - column:
+                  name: street
+                  value: Main street
+              - column:
+                  name: house_number
+                  value: 45
+              - column:
+                  name: stars
+                  value: 5
+        - insert:
+            tableName: hotel
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: name
+                  value: Hilton
+              - column:
+                  name: city
+                  value: Saint-Petersburg
+              - column:
+                  name: street
+                  value: Ligovsky avenue
+              - column:
+                  name: house_number
+                  value: 59
+              - column:
+                  name: stars
+                  value: 5
+        - insert:
+            tableName: hotel
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: name
+                  value: Marriott
+              - column:
+                  name: city
+                  value: Milan
+              - column:
+                  name: street
+                  value: Pliano street
+              - column:
+                  name: house_number
+                  value: 124
+              - column:
+                  name: stars
+                  value: 4
+        - insert:
+            tableName: hotel
+            columns:
+              - column:
+                  name: id
+                  value: 5
+              - column:
+                  name: name
+                  value: Ramada
+              - column:
+                  name: city
+                  value: Stambul
+              - column:
+                  name: street
+                  value: Rapalu avenue
+              - column:
+                  name: house_number
+                  value: 3
+              - column:
+                  name: stars
+                  value: 5
+        - insert:
+            tableName: hotel
+            columns:
+              - column:
+                  name: id
+                  value: 6
+              - column:
+                  name: name
+                  value: Hampton
+              - column:
+                  name: city
+                  value: Stambul
+              - column:
+                  name: street
+                  value: Busku avenue
+              - column:
+                  name: house_number
+                  value: 76
+              - column:
+                  name: stars
+                  value: 3
+        - insert:
+            tableName: hotel
+            columns:
+              - column:
+                  name: id
+                  value: 7
+              - column:
+                  name: name
+                  value: Park inn
+              - column:
+                  name: city
+                  value: Saint-Petersburg
+              - column:
+                  name: street
+                  value: Pobedy square
+              - column:
+                  name: house_number
+                  value: 2
+              - column:
+                  name: stars
+                  value: 4
+        - insert:
+            tableName: hotel
+            columns:
+              - column:
+                  name: id
+                  value: 8
+              - column:
+                  name: name
+                  value: Hyatt
+              - column:
+                  name: city
+                  value: New-York
+              - column:
+                  name: street
+                  value: Roudstwood avenue
+              - column:
+                  name: house_number
+                  value: 45
+              - column:
+                  name: stars
+                  value: 2
+        - insert:
+            tableName: hotel
+            columns:
+              - column:
+                  name: id
+                  value: 9
+              - column:
+                  name: name
+                  value: SHANGRI-LA
+              - column:
+                  name: city
+                  value: Milan
+              - column:
+                  name: street
+                  value: Osuari square
+              - column:
+                  name: house_number
+                  value: 76
+              - column:
+                  name: stars
+                  value: 4
+      rollback:
+        - delete:
+            tableName: hotel
+            where: id<10

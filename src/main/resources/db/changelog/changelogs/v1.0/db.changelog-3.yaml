@@ -1,0 +1,77 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1591720519416
+      author: alxandr_kudinov
+      comment: "create room_type table"
+      changes:
+        - createTable:
+            tableName: room_type
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: room_type_PK
+                  name: id
+                  type: TINYINT
+              - column:
+                  name: name
+                  type: VARCHAR(45)
+      rollback:
+        - dropTable:
+            tableName: room_type
+
+  - changeSet:
+      id: 1591720530293
+      author: alxandr_kudinov
+      comment: "add data to room_type table"
+      changes:
+        - insert:
+            tableName: room_type
+            columns:
+              - column:
+                  name: id
+                  value: 1
+              - column:
+                  name: name
+                  value: Economy
+        - insert:
+            tableName: room_type
+            columns:
+              - column:
+                  name: id
+                  value: 2
+              - column:
+                  name: name
+                  value: Standard
+        - insert:
+            tableName: room_type
+            columns:
+              - column:
+                  name: id
+                  value: 3
+              - column:
+                  name: name
+                  value: Standard+
+        - insert:
+            tableName: room_type
+            columns:
+              - column:
+                  name: id
+                  value: 4
+              - column:
+                  name: name
+                  value: Luxury
+        - insert:
+            tableName: room_type
+            columns:
+              - column:
+                  name: id
+                  value: 5
+              - column:
+                  name: name
+                  value: Presidential
+      rollback:
+        - delete:
+            tableName: room_type
+            where: id<6
